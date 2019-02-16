@@ -21,13 +21,6 @@ public class WordInput : MonoBehaviour
             }else if (Input.GetKeyDown(KeyCode.Q))
             {
                 Debug.Log("Quitting application");
-                if (Application.isEditor)
-                {
-                    UnityEditor.EditorApplication.isPlaying = false;
-                } else
-                {
-
-                }
                 Application.Quit();
             }
         }else if (Input.GetKeyDown(KeyCode.Escape))
