@@ -11,9 +11,12 @@ public class WordManager : MonoBehaviour
     // Make the main list:
 
     // Use the test w/ timestamps
-    public static string cleanText = System.IO.File.ReadAllText("Assets/Text/AlmostToTheTickScript.txt", System.Text.Encoding.ASCII);
-    public static string[] listOfWords = cleanText.Split('\n');
-
+    public TextAsset ATTTScript;
+   
+    //public static string cleanText = System.IO.File.ReadAllText("Assets/Text/AlmostToTheTickScript.txt", System.Text.Encoding.ASCII);
+    //public static string[] listOfWords = cleanText.Split('\n');
+    public static string cleanText;
+    public static string[] listOfWords;
     public VideoController videoController;
     public WordSpawner wordSpawner;
 
@@ -21,8 +24,8 @@ public class WordManager : MonoBehaviour
     private bool hasActiveWord;
     private Word activeWord;
     public static int position = 0;
-    public string currentWord = listOfWords[position].Split('_')[0];
-    public float currentTime = float.Parse(listOfWords[position].Split('_')[1]) + offset;
+    public string currentWord;
+    public float currentTime;
     // if you're using an offset:
 
 
@@ -41,7 +44,10 @@ public class WordManager : MonoBehaviour
 
     private void Start()
     {
-       
+        cleanText = ATTTScript.ToString();
+        listOfWords = cleanText.Split('\n');
+        currentWord = listOfWords[position].Split('_')[0];
+        currentTime = float.Parse(listOfWords[position].Split('_')[1]) + offset;
         GameObject InfoBox = GameObject.Find("InfoBox");
         if (GameObject.Find("InfoBox") != null)
         {
@@ -56,7 +62,6 @@ public class WordManager : MonoBehaviour
                 progressShowing = true;
             }
         }
-
         settingsString = makeSettingsString();
         Word settingsWord = new Word("settings", 9999f, wordSpawner.SpawnWord(settingsLocation));
         settingsWord.ChangeSize(14);
@@ -116,7 +121,6 @@ public class WordManager : MonoBehaviour
         if (position > listOfWords.Length - 1)
         {
             Debug.Log("Done");
-            Application.Quit();
             SceneManager.LoadScene(2);
         }
         currentWord = listOfWords[position].Split('_')[0];
