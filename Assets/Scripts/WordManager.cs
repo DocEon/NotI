@@ -19,7 +19,6 @@ public class WordManager : MonoBehaviour
     public static string[] listOfWords;
     public VideoController videoController;
     public WordSpawner wordSpawner;
-
     private static float offset = 0f;
     private bool hasActiveWord;
     private Word activeWord;
@@ -44,6 +43,10 @@ public class WordManager : MonoBehaviour
 
     private void Start()
     {
+        if (Application.platform == RuntimePlatform.OSXPlayer)
+        {
+            offset = -.15f;
+        }
         cleanText = ATTTScript.ToString();
         listOfWords = cleanText.Split('\n');
         currentWord = listOfWords[position].Split('_')[0];
