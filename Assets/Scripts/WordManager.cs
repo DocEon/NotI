@@ -160,7 +160,17 @@ public class WordManager : MonoBehaviour
             words.Remove(activeWord);
             AddWord();
         }
-        // ` = skip mode.
+        if (letter == '\\')
+            {
+            float newTime = videoController.currentTime + 30f;
+            videoController.PauseVideo();
+            videoController.Seek(newTime);
+            videoController.PlayVideo();
+        }
+        if (letter == ']')
+        {
+            position = position + 50;
+        }
         if (hasActiveWord && letter == '`')
         {
             hasActiveWord = false;

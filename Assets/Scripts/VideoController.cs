@@ -35,9 +35,9 @@ public class VideoController : MonoBehaviour
         get { return isDone;  }
     }
 
-    public double currentTime
+    public float currentTime
     {
-        get { return video.time; }
+        get { return (float)video.time; }
     }
     
     public ulong Duration
